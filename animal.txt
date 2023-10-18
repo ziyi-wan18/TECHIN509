@@ -6,5 +6,6 @@ Turtle
 Fish
 Tiger
 Lion
-
+Rabbit
+Sea Lion
 
