@@ -1,0 +1,46 @@
+from typing import List
+
+def flood_fill(input_board: List[str], old: str, new: str, x: int, y: int) -> List[str]:
+    """Returns board with old values replaced with new values
+    through flood filling starting from the coordinates x, y
+    Args:
+        input_board (List[str])
+        old (str): Value to be replaced
+        new (str): Value that replaces the old
+        x (int): X-coordinate of the flood start point
+        y (int): Y-coordinate of the flood start point
+    Returns:
+        List[str]: Modified board
+    """
+    # Implement your code here.
+    board_sep = [list(row) for row in input_board]
+    def fill(x,y):
+      if x < 0 or y < 0 or x >= len(board_sep[0]) or y >= len(board_sep):
+        return
+      if board_sep[y][x] != old:
+        return
+      board_sep[y][x] = new
+      fill(x+1, y)    
+      fill(x-1, y)    
+      fill(x, y+1)    
+      fill(x, y-1)    
+
+    fill(x,y)
+    return [''.join(row) for row in board_sep]
+
+
+board = [
+    "......................",
+    "......##########......",
+    "......#........#......",
+    "......#........#......",
+    "......#........#####..",
+    "....###............#..",
+    "....#............###..",
+    "....##############....",
+]
+
+modified_board = flood_fill(input_board=board, old=".", new="~", x=7, y=2)
+
+for a in modified_board:
+    print(a)
